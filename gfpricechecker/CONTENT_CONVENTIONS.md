@@ -101,7 +101,14 @@ one:
 - All data is stored locally on the device.
 - No cloud sync, no account, no registration.
 - No analytics and no data collection of any kind.
+- Text recognition happens on-device.
 - The user can export and delete everything.
+
+**Do not overclaim.** Two things are true and must not be described otherwise:
+
+- **Backup files are not encrypted.** The JSON backup is plain text with Base64 images. Never say
+  or imply backups are encrypted.
+- **The tax ID is stored unencrypted**, in `@AppStorage` on iOS.
 
 Do not describe a privacy property the platform does not actually have. If Android ships with a
 different posture, this file changes first, then the copy.

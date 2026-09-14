@@ -79,9 +79,13 @@ produces two different numbers.
 
 ### 5. Privacy posture
 
-Local storage only. No cloud sync, no account, no analytics, no data collection. This is a
-**constraint**, not a description — an Android implementation that adds telemetry is a different
-product, and the website's privacy claims would become false.
+Local storage only. No cloud sync, no account, no analytics, no data collection. On-device text
+recognition. This is a **constraint**, not a description — an Android implementation that adds
+telemetry is a different product, and the website's privacy claims would become false.
+
+What is *not* true, and must not be claimed: backups are unencrypted plain JSON, and the tax ID is
+stored unencrypted. Matching iOS here means matching the honesty, not the weakness — an Android
+build is free to do better, and should say so rather than inheriting the caveat silently.
 
 ### 6. Export formats
 
