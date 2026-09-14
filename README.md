@@ -69,6 +69,30 @@ a link instead.
 
 ---
 
+## Changing main
+
+`main` is the source of truth for three repos, so changes should arrive as a PR with a
+reviewable diff rather than a direct push.
+
+**This is not enforced by GitHub.** This repo is private on the Free plan, where both classic
+branch protection and rulesets return `403 Upgrade to GitHub Pro or make this repository
+public`. What exists instead is a `pre-push` hook in [`hooks/`](hooks/), which is opt-in per
+clone:
+
+```bash
+git config core.hooksPath hooks
+```
+
+Run that after cloning, or the hook does nothing. Know its limits before trusting it: it is
+bypassed by `--no-verify`, it exists only in clones that ran the command above, and it cannot
+see a commit made through the GitHub web UI. It catches the absent-minded `git push` on `main`,
+which is the realistic failure here — not a determined one.
+
+Real enforcement needs GitHub Pro, or making this repo public. Until then the hook is a
+seatbelt, not a lock.
+
+---
+
 ## History
 
 `meta/` moved out of `GFPriceChecker/docs/` in September 2026 — see
