@@ -35,8 +35,10 @@ user does with those records at tax time is between them and their accountant.
 Before merging copy or documentation changes, in any GFPriceChecker repo:
 
 ```bash
+# Quote the --include patterns: zsh expands them as globs otherwise.
 grep -rn "CRA\|Tax Compliant\|tax compliance\|Line 33099" \
-  --include=*.swift --include=*.kt --include=*.html --include=*.json --include=*.md .
+  --include='*.swift' --include='*.kt' --include='*.html' \
+  --include='*.json' --include='*.md' .
 ```
 
 Every surviving hit should be explanatory context, or a dated historical record that admits its
