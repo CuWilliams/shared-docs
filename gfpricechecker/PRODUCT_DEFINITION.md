@@ -59,6 +59,11 @@ extendedNormalizedDifferential  = normalizedDifferential × quantity
 
 where `gfUnitPrice = gfPrice / gfSizeValue` and `regularUnitPrice = nonGFPrice / nonGFSizeValue`.
 
+**Displayed as:** "Package Price Differential" (`differential`) and "Size-Adjusted Differential"
+(`normalizedDifferential`), each with an "Extended" form for the purchase. The size-adjusted
+figure is a dollar amount per package, not a rate, so it is **never** labelled a unit price
+differential; that name belongs to the rate alone.
+
 **Rates never scale with quantity.** Buying three loaves does not change the price per gram, so
 `unitPriceDifferential` has no extended form. Everything that totals a purchase must use an
 `extended*` figure; everything that shows a rate must not.
@@ -76,6 +81,10 @@ Worked example, from the iOS source:
 `$/100 g` for gram weights; `$/unit` for everything else. Labelled `100g` or the raw unit.
 This is a display convention and must be identical across platforms, or the same shopping trip
 produces two different numbers.
+
+The CSV writes unit prices at this scale to 4 decimal places — `$/mL` rounds to nothing at 2 —
+and states the basis (`100g`, `kg`, `mL`, …) in its own column, since it varies row to row. With
+no size unit there is no basis, and the unit price fields are empty.
 
 ### 5. Privacy posture
 
@@ -97,10 +106,16 @@ CSV columns, in order:
 ```
 Purchase Date, Quantity, GF Product, GF Price, GF Size, GF Size (num),
 Non-GF Product, Non-GF Price, Non-GF Size, Non-GF Size (num), Size Unit,
-GF Unit Price, Regular Unit Price, Package Price Differential,
-Unit Price Differential, Extended Package Differential,
-Extended Unit Price Differential, Category, Store, Receipt Verified, Notes
+Unit Price Basis, GF Unit Price, Regular Unit Price, Package Price Differential,
+Size-Adjusted Differential, Extended Package Differential,
+Extended Size-Adjusted Differential, Category, Store, Receipt Verified, Notes
 ```
+
+The CSV is for spreadsheets, not people, so its numbers and dates are machine formats whatever the
+device locale: `.` as the decimal separator, no grouping, Latin digits, and `YYYY-MM-DD` dates
+(`en_US_POSIX` on iOS; `Locale.ROOT` is the JVM equivalent). Money has 2 places and unit prices 4.
+A field holding a comma, a quote or any line break — Windows `\r\n` included — is quoted, with
+quotes doubled. The file is UTF-8 with a BOM, for Excel.
 
 The PDF is a branded multi-page report covering a date range, with receipt images included.
 
