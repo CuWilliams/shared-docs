@@ -83,6 +83,7 @@ Consistent terms across all three platforms. Pick the left column.
 | regular equivalent | normal product, non-GF (in user-facing copy) |
 | differential | markup, premium, surcharge |
 | unit price | price per unit, normalized price |
+| size-adjusted differential | unit price differential, normalized differential |
 | receipt verification | proof, validation, audit |
 | records / your records | tax documents, submission, filing |
 | export | report generation, filing |
@@ -90,6 +91,11 @@ Consistent terms across all three platforms. Pick the left column.
 
 **Unit pricing** is `$/100 g` for weights and `$/unit` otherwise. Say "adjusted for package size"
 when explaining why it exists — that is the honest reason, and it is the app's actual method.
+
+The **size-adjusted differential** is the dollar figure the app leads with: the unit-price gap
+scaled back to the gluten-free package actually bought (`PRODUCT_DEFINITION.md` §3). It is an
+amount per package, not a price per gram, so don't call it a unit price differential. "Compares
+by unit price" is still the right way to describe the method.
 
 ---
 
