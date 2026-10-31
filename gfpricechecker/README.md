@@ -7,6 +7,8 @@ Shared by the iOS app, the website, and any future Android app.
 - **[PRODUCT_DEFINITION.md](PRODUCT_DEFINITION.md)** — the platform-independent product: data
   model, differential arithmetic, export formats, privacy posture, and the line between what a
   second implementation must match and what it may change.
+- **[vectors/](vectors/)** — the cross-platform test vectors: inputs and expected outputs that
+  every implementation must pass. GFPriceChecker vendors a copy and runs it as `VectorTests`.
 
 ## Which repo owns what
 
