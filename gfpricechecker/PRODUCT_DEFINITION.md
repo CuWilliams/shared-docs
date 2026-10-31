@@ -150,6 +150,12 @@ quotes doubled. The file is UTF-8 with a BOM, for Excel.
 
 The PDF is a branded multi-page report covering a date range, with receipt images included.
 
+A CSV export covers the pairs whose reporting date falls in a range, chosen as a preset or as two
+days picked by the user. A custom range is **whole days in the device's time zone**: from midnight
+at the start of the earlier day to 23:59:59 on the later one, whichever order the days were
+picked in and whatever time of day the picker happens to carry. The current-year preset likewise
+runs from midnight on 1 January to 23:59:59 on 31 December.
+
 ### 7. Backup interchange
 
 The JSON backup is the only route a user has between devices, and **it is the migration path if
