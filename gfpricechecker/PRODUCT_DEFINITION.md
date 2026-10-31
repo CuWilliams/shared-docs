@@ -77,6 +77,11 @@ Rounding each row first and adding those up can be off by up to half a cent per 
 size-adjusted figures divide, so this is the usual case for them, not an edge case. The package
 differentials are differences of whole-cent prices, so they come out the same either way.
 
+**Rounding is half-even** (banker's rounding): a figure exactly on a half cent rounds to the even
+cent, so $0.465 shows as $0.46 and $0.475 as $0.48. This applies to every figure shown and every
+figure the CSV writes. It is what iOS's currency and number formatters do by default, and not what
+`BigDecimal`'s `HALF_UP` or `Math.round` do, so a second platform has to ask for it.
+
 Worked example, from the iOS source:
 
 > GF $7.99 / 400 g vs Regular $3.99 / 675 g
@@ -138,6 +143,16 @@ field for field.
 > every stored property is hand-duplicated in the backup model and in the mapping code on both
 > sides of it. Adding a field without updating all three compiles fine, ships fine, and silently
 > drops the field on restore.
+
+### 8. Test vectors
+
+[`vectors/`](vectors/) holds plain inputs and expected outputs for everything above that can be
+checked mechanically — the arithmetic and its rounding, reporting totals and date ranges, the CSV
+character for character, receipt parsing, price ranking, validation, and reading backups. **The
+vectors are normative: a conforming implementation must pass all of them.** Where this document
+and a vector disagree, raise it — one of them is wrong — but until it is settled the vector is
+what an implementation is tested against. [`vectors/README.md`](vectors/README.md) has the
+conventions for reading them.
 
 ---
 
