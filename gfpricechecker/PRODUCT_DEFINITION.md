@@ -45,6 +45,22 @@ Prices are money in a document a user may rely on at tax time. Use the platform'
 Display as Canadian currency through the platform's localized formatter. Never build a currency
 string by interpolation.
 
+**Decimal text is read in one plain format**, whether a user typed it or a backup holds it:
+
+- an optional leading `-`, then ASCII digits with at most one `.`, and at least one digit
+  somewhere — `6.99`, `.5` and `5.` are all numbers
+- nothing else: no `+`, exponent, grouping separator, currency symbol, space, non-ASCII digit or
+  trailing text. Input fields are trimmed of spaces and tabs first; backup strings are not
+- a typed price has at most 2 decimal places. A typed size has no limit
+- a typed price or size with a leading `-` that is otherwise a plain number is rejected as
+  negative (`priceNegative`, `sizeNotPositive`), which tells the user more than "not a number"
+
+The point is that text a parser can only half-read is rejected, never silently changed: a lenient
+parser reads `1,5` as 1, and the user's 1.5 is stored as 1 with nothing on screen saying so. Use
+neither Swift's `Decimal(string:)`, which stops at the first character it can't read, nor
+Kotlin's `BigDecimal(String)` on its own, which accepts exponents and non-ASCII digits; check the
+whole string against the format, then convert.
+
 ### 3. The arithmetic
 
 Four figures, and the distinction between them is the single easiest thing to get wrong:
