@@ -71,6 +71,12 @@ differential; that name belongs to the rate alone.
 `normalizedDifferential` and the unit prices return **nothing** when size data is incomplete for
 either side. Do not substitute zero — a missing comparison is not a zero-dollar comparison.
 
+**Round the final sum, not the rows.** A total — for a receipt, a category, a month, a year or an
+export — adds up the unrounded `extended*` figures and rounds to the cent once, when it is shown.
+Rounding each row first and adding those up can be off by up to half a cent per row. The
+size-adjusted figures divide, so this is the usual case for them, not an edge case. The package
+differentials are differences of whole-cent prices, so they come out the same either way.
+
 Worked example, from the iOS source:
 
 > GF $7.99 / 400 g vs Regular $3.99 / 675 g
@@ -114,6 +120,9 @@ Extended Size-Adjusted Differential, Category, Store, Receipt Verified, Notes
 The CSV is for spreadsheets, not people, so its numbers and dates are machine formats whatever the
 device locale: `.` as the decimal separator, no grouping, Latin digits, and `YYYY-MM-DD` dates
 (`en_US_POSIX` on iOS; `Locale.ROOT` is the JVM equivalent). Money has 2 places and unit prices 4.
+Each row is rounded on its own, so a size-adjusted column can sum to a cent or so away from the
+total the app shows for the same rows. That is expected (§3: the total rounds the final sum), and
+the app's figure is the total.
 A field holding a comma, a quote or any line break — Windows `\r\n` included — is quoted, with
 quotes doubled. The file is UTF-8 with a BOM, for Excel.
 
