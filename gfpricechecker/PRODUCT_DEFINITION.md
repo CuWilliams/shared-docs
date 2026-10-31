@@ -77,10 +77,11 @@ Rounding each row first and adding those up can be off by up to half a cent per 
 size-adjusted figures divide, so this is the usual case for them, not an edge case. The package
 differentials are differences of whole-cent prices, so they come out the same either way.
 
-**Rounding is half-even** (banker's rounding): a figure exactly on a half cent rounds to the even
-cent, so $0.465 shows as $0.46 and $0.475 as $0.48. This applies to every figure shown and every
-figure the CSV writes. It is what iOS's currency and number formatters do by default, and not what
-`BigDecimal`'s `HALF_UP` or `Math.round` do, so a second platform has to ask for it.
+**Rounding is half-up**, the common rule: a figure exactly on a half cent rounds away from zero,
+so $0.465 shows as $0.47 and -$0.125 as -$0.13. This applies to every figure shown and every
+figure the CSV writes. It is `BigDecimal`'s `RoundingMode.HALF_UP`. It is not what iOS's currency
+and number formatters do by default, which is half-even, so iOS has to ask for it; nor is it
+`Math.round`, which rounds -0.125 to -0.12.
 
 Worked example, from the iOS source:
 
