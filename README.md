@@ -74,23 +74,24 @@ a link instead.
 `main` is the source of truth for three repos, so changes should arrive as a PR with a
 reviewable diff rather than a direct push.
 
-**This is not enforced by GitHub yet.** While this repo was private on the Free plan, both
-classic branch protection and rulesets returned `403 Upgrade to GitHub Pro or make this
-repository public`. It went public in November 2026, so a ruleset requiring a PR on `main` can
-now be turned on; until it is, what exists is a `pre-push` hook in [`hooks/`](hooks/), which is
-opt-in per clone:
+**GitHub enforces this.** A ruleset on `main`, "Protect main"
+([settings](https://github.com/CuWilliams/shared-docs/rules/26766634)), requires a pull request
+(zero approvals, since a sole owner cannot approve their own PR), blocks force pushes, and
+blocks deleting the branch. Nobody is on its bypass list, the owner included. A direct push is
+refused with `GH013: Repository rule violations found`. It was turned on in November 2026, once
+the repo went public. While it was private on the Free plan, both classic branch protection and
+rulesets returned `403 Upgrade to GitHub Pro or make this repository public`.
+
+There is also a `pre-push` hook in [`hooks/`](hooks/), which catches the mistake locally before
+anything reaches GitHub. It is opt-in per clone:
 
 ```bash
 git config core.hooksPath hooks
 ```
 
-Run that after cloning, or the hook does nothing. Know its limits before trusting it: it is
-bypassed by `--no-verify`, it exists only in clones that ran the command above, and it cannot
-see a commit made through the GitHub web UI. It catches the absent-minded `git push` on `main`,
-which is the realistic failure here — not a determined one.
-
-Real enforcement is a ruleset on `main`. Until one is turned on, the hook is a seatbelt, not a
-lock.
+Run that after cloning, or the hook does nothing. It is bypassed by `--no-verify` and exists
+only in clones that ran the command above. That is fine now: the ruleset is the lock, and the
+hook just gives a faster, clearer refusal than the server's.
 
 ---
 
