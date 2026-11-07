@@ -2,10 +2,10 @@
 #
 # pre-push - refuse direct pushes to main.
 #
-# Why this is a hook and not a GitHub branch protection rule: shared-docs is a
+# Why this is a hook and not a GitHub branch protection rule: shared-docs was a
 # private repo on the Free plan, where GitHub returns 403 for both classic branch
-# protection and rulesets. The real fix is GitHub Pro or making the repo public;
-# until then this is client-side only.
+# protection and rulesets. It is public now, so a ruleset on main is the real fix;
+# until one is turned on, this is client-side only.
 #
 # Know what that means. This is a seatbelt, not a lock:
 #   - `--no-verify` bypasses it, by design.

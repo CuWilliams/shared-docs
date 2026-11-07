@@ -2,6 +2,14 @@
 
 Shared by the iOS app, the website, and any future Android app.
 
+> **Status: development ended in November 2026.** Budget 2026 proposes an optional flat $1,000
+> celiac claim under the Medical Expense Tax Credit, with no calculation and no receipts, which
+> removes most of the record-keeping GF PriceChecker was built for. The iOS app was never released
+> and its code is open source under the MIT License at
+> [CuWilliams/GFPriceChecker](https://github.com/CuWilliams/GFPriceChecker). These documents are
+> left as they stood, for anyone who builds on it. The Android notes describe a port nobody is
+> now planning, and are kept because they are exactly what such a port would need.
+
 - **[CONTENT_CONVENTIONS.md](CONTENT_CONVENTIONS.md)** — how the product talks about what it does.
   Read before writing user-facing copy in any repo. The first rule is legal exposure.
 - **[PRODUCT_DEFINITION.md](PRODUCT_DEFINITION.md)** — the platform-independent product: data

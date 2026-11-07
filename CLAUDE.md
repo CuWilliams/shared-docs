@@ -104,7 +104,7 @@ covers only part of the ground.
 - **`check-claude-md.sh` scores structure, not truth.** It counts lines and looks for section
   headings. A `CLAUDE.md` can score 6/6 while confidently stating something false, which is the
   failure that actually costs time.
-- **The consuming repos are private or separate.** There is no submodule and no sync. That is
+- **The consuming repos are separate.** There is no submodule and no sync. That is
   deliberate — a submodule would be a heavier commitment than the content warrants — but it means
   the pointers are only as good as the person maintaining them.
 
