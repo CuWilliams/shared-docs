@@ -2,12 +2,13 @@
 #
 # pre-push - refuse direct pushes to main.
 #
-# Why this is a hook and not a GitHub branch protection rule: shared-docs was a
-# private repo on the Free plan, where GitHub returns 403 for both classic branch
-# protection and rulesets. It is public now, so a ruleset on main is the real fix;
-# until one is turned on, this is client-side only.
+# GitHub enforces this too: the "Protect main" ruleset requires a PR on main,
+# and has done since the repo went public in November 2026 (while it was private
+# on the Free plan, GitHub refused rulesets with a 403, and this hook was the only
+# guard). The hook stays as the early, local refusal: it stops the push before
+# anything leaves the machine, where the ruleset rejects it at the server.
 #
-# Know what that means. This is a seatbelt, not a lock:
+# Its limits, which the ruleset now covers:
 #   - `--no-verify` bypasses it, by design.
 #   - It only exists in clones that ran `git config core.hooksPath hooks`.
 #   - It cannot stop a commit made through the GitHub web UI.
