@@ -74,10 +74,11 @@ a link instead.
 `main` is the source of truth for three repos, so changes should arrive as a PR with a
 reviewable diff rather than a direct push.
 
-**This is not enforced by GitHub.** This repo is private on the Free plan, where both classic
-branch protection and rulesets return `403 Upgrade to GitHub Pro or make this repository
-public`. What exists instead is a `pre-push` hook in [`hooks/`](hooks/), which is opt-in per
-clone:
+**This is not enforced by GitHub yet.** While this repo was private on the Free plan, both
+classic branch protection and rulesets returned `403 Upgrade to GitHub Pro or make this
+repository public`. It went public in November 2026, so a ruleset requiring a PR on `main` can
+now be turned on; until it is, what exists is a `pre-push` hook in [`hooks/`](hooks/), which is
+opt-in per clone:
 
 ```bash
 git config core.hooksPath hooks
@@ -88,8 +89,8 @@ bypassed by `--no-verify`, it exists only in clones that ran the command above, 
 see a commit made through the GitHub web UI. It catches the absent-minded `git push` on `main`,
 which is the realistic failure here — not a determined one.
 
-Real enforcement needs GitHub Pro, or making this repo public. Until then the hook is a
-seatbelt, not a lock.
+Real enforcement is a ruleset on `main`. Until one is turned on, the hook is a seatbelt, not a
+lock.
 
 ---
 
